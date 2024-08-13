@@ -7,19 +7,29 @@ class Game {
     this.width = this.canvas.width;
     this.height = this.canvas.height;
     this.player = new Player(this);
+
+    this.resize(window.innerWidth, window.innerHeight);
+    window.addEventListener("resize", (e) => {
+      console.log(e);
+      this.resize(e.currentTarget.innerWidth, e.currentTarget.innerHeight);
+    });
   }
   render() {
-    this.ctx.fillStyle = "red";
     this.player.update();
     this.player.draw();
+  }
+  resize(width, height) {
+    this.canvas.width = width;
+    this.canvas.height = height;
+    this.ctx.fillStyle = "red";
+    this.width = this.canvas.width;
+    this.height = this.canvas.height;
   }
 }
 
 window.addEventListener("load", function () {
   const canvas = document.getElementById("canvas1");
   const ctx = canvas.getContext("2d");
-  canvas.width = 720;
-  canvas.height = 720;
 
   const game = new Game(canvas, ctx);
 
