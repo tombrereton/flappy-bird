@@ -18,6 +18,12 @@ class Game {
     this.canvas.addEventListener("mousedown", (e) => {
       this.player.flap();
     });
+    window.addEventListener("keydown", (e) => {
+      if (e.key === " ") this.player.flap();
+    });
+    this.canvas.addEventListener("touchstart", (e) => {
+      this.player.flap();
+    });
   }
   render() {
     this.player.update();
