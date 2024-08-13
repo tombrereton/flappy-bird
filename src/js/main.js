@@ -7,10 +7,11 @@ class Game {
     this.width = this.canvas.width;
     this.height = this.canvas.height;
     this.player = new Player(this);
+    this.baseHeight = 720;
+    this.ratio = this.height / this.baseHeight;
 
     this.resize(window.innerWidth, window.innerHeight);
     window.addEventListener("resize", (e) => {
-      console.log(e);
       this.resize(e.currentTarget.innerWidth, e.currentTarget.innerHeight);
     });
   }
@@ -24,6 +25,9 @@ class Game {
     this.ctx.fillStyle = "red";
     this.width = this.canvas.width;
     this.height = this.canvas.height;
+    this.ratio = this.height / this.baseHeight;
+    this.player.resize();
+    console.log(this.height, this.baseHeight, this.ratio);
   }
 }
 
