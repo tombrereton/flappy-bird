@@ -3,15 +3,23 @@
 ---
 
 <canvas id="canvas1"></canvas>
-<script type="module" src="src/js/main.js"></script>
+<div class="assets">
+    <img id="background" src="src/js/background_single.png" />
+    <div>
+        <script type="module" src="src/js/main.js"></script>
 
-<style>
-    #canvas1 {
-        position: absolute;
-        top: 0;
-        left: 0;
-        background: blue;
-        max-width: 100%;
-        max-height: 100%;
-    }
-</style>
+        <style>
+            #canvas1 {
+                position: absolute;
+                top: 0;
+                left: 0;
+                max-width: 100%;
+                max-height: 100%;
+            }
+
+            .assets {
+                display: none;
+            }
+        </style>
+    </div>
+</div>

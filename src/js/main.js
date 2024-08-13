@@ -1,4 +1,5 @@
 import Player from "./player.js";
+import Background from "./background.js";
 
 class Game {
   constructor(canvas, context) {
@@ -6,10 +7,12 @@ class Game {
     this.ctx = context;
     this.width = this.canvas.width;
     this.height = this.canvas.height;
-    this.player = new Player(this);
     this.baseHeight = 720;
     this.ratio = this.height / this.baseHeight;
+    this.background = new Background(this);
+    this.player = new Player(this);
     this.gravity;
+    this.speed;
 
     this.resize(window.innerWidth, window.innerHeight);
     window.addEventListener("resize", (e) => {
@@ -25,10 +28,14 @@ class Game {
       this.player.flap();
     });
   }
+
   render() {
+    this.background.update();
+    this.background.draw();
     this.player.update();
     this.player.draw();
   }
+
   resize(width, height) {
     this.canvas.width = width;
     this.canvas.height = height;
@@ -38,6 +45,8 @@ class Game {
     this.ratio = this.height / this.baseHeight;
 
     this.gravity = 0.15 * this.ratio;
+    this.speed = 3;
+    this.background.resize();
     this.player.resize();
   }
 }
