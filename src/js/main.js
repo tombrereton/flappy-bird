@@ -9,6 +9,7 @@ class Game {
     this.player = new Player(this);
     this.baseHeight = 720;
     this.ratio = this.height / this.baseHeight;
+    this.gravity = 1;
 
     this.resize(window.innerWidth, window.innerHeight);
     window.addEventListener("resize", (e) => {
