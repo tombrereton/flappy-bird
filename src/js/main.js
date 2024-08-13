@@ -9,11 +9,14 @@ class Game {
     this.player = new Player(this);
     this.baseHeight = 720;
     this.ratio = this.height / this.baseHeight;
-    this.gravity = 1;
+    this.gravity;
 
     this.resize(window.innerWidth, window.innerHeight);
     window.addEventListener("resize", (e) => {
       this.resize(e.currentTarget.innerWidth, e.currentTarget.innerHeight);
+    });
+    this.canvas.addEventListener("mousedown", (e) => {
+      this.player.flap();
     });
   }
   render() {
@@ -27,8 +30,9 @@ class Game {
     this.width = this.canvas.width;
     this.height = this.canvas.height;
     this.ratio = this.height / this.baseHeight;
+
+    this.gravity = 0.15 * this.ratio;
     this.player.resize();
-    console.log(this.height, this.baseHeight, this.ratio);
   }
 }
 
