@@ -1,5 +1,6 @@
 import Player from "./player.js";
 import Background from "./background.js";
+import Obstacle from "./obstacle.js";
 
 class Game {
   constructor(canvas, context) {
@@ -13,6 +14,8 @@ class Game {
     this.player = new Player(this);
     this.gravity;
     this.speed;
+    this.obstacles = [];
+    this.numberofObstacles = 10;
 
     this.resize(window.innerWidth, window.innerHeight);
     window.addEventListener("resize", (e) => {
@@ -34,6 +37,10 @@ class Game {
     this.background.draw();
     this.player.update();
     this.player.draw();
+    this.obstacles.forEach((obstacle) => {
+      obstacle.update();
+      obstacle.draw();
+    });
   }
 
   resize(width, height) {
@@ -48,6 +55,17 @@ class Game {
     this.speed = 2 * this.ratio;
     this.background.resize();
     this.player.resize();
+    this.createObtacles();
+    this.obstacles.forEach((obstacle) => obstacle.resize());
+  }
+
+  createObtacles() {
+    this.obstacles = [];
+    const firstX = 100;
+    const obstacleSpacing = 100;
+    for (let i = 0; i < this.numberofObstacles; i++) {
+      this.obstacles.push(new Obstacle(this, firstX + i * obstacleSpacing));
+    }
   }
 }
 
