@@ -13,7 +13,7 @@ class Game {
     this.background = new Background(this);
     this.player = new Player(this);
     this.obstacles = [];
-    this.numberofObstacles = 1;
+    this.numberofObstacles = 10;
     this.gravity;
     this.speed;
     this.score;
@@ -42,6 +42,8 @@ class Game {
     this.ctx.fillStyle = "blue";
     this.ctx.font = "15px Bungee";
     this.ctx.textAlign = "right";
+    this.ctx.lineWidth = 3;
+    this.ctx.strokeStyle = "white";
     this.width = this.canvas.width;
     this.height = this.canvas.height;
     this.ratio = this.height / this.baseHeight;

@@ -7,12 +7,18 @@ export default class Obstacle {
     this.scaleHeight = this.spriteHeight * this.game.ratio;
     this.x = x;
     this.y = Math.random() * (this.game.height - this.scaleHeight);
+    this.collisionX;
+    this.collisionY;
+    this.collisionRadius = this.scaleWidth * 0.5;
     this.speedY =
       Math.random() < 0.5 ? -1 * this.game.ratio : 1 * this.game.ratio;
+    this.markedForDeletion = false;
   }
   update() {
     this.x -= this.game.speed;
     this.y += this.speedY;
+    this.collisionX = this.x + this.scaleWidth * 0.5;
+    this.collisionY = this.y + this.scaleHeight * 0.5;
     if (this.y <= 0 || this.y >= this.game.height - this.scaleHeight) {
       this.speedY *= -1;
     }
@@ -28,6 +34,15 @@ export default class Obstacle {
   }
   draw() {
     this.game.ctx.fillRect(this.x, this.y, this.scaleWidth, this.scaleHeight);
+    this.game.ctx.beginPath();
+    this.game.ctx.arc(
+      this.collisionX,
+      this.collisionY,
+      this.collisionRadius,
+      0,
+      Math.PI * 2,
+    );
+    this.game.ctx.stroke();
   }
   resize() {
     this.scaleWidth = this.spriteWidth * this.game.ratio;
