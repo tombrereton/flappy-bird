@@ -13,11 +13,12 @@ class Game {
     this.background = new Background(this);
     this.player = new Player(this);
     this.obstacles = [];
-    this.numberofObstacles = 10;
+    this.numberofObstacles = 1;
     this.gravity;
     this.speed;
     this.score;
     this.gameOver;
+    this.timer;
 
     this.resize(window.innerWidth, window.innerHeight);
 
@@ -53,9 +54,11 @@ class Game {
     this.obstacles.forEach((obstacle) => obstacle.resize());
     this.score = 0;
     this.gameOver = false;
+    this.timer = 0;
   }
 
-  render() {
+  render(deltaTime) {
+    if (!this.gameOver) this.timer += deltaTime;
     this.background.update();
     this.background.draw();
     this.drawStatusText();
@@ -76,9 +79,19 @@ class Game {
     }
   }
 
+  formatTimer() {
+    return (this.timer * 0.001).toFixed(1);
+  }
   drawStatusText() {
     this.ctx.save();
     this.ctx.fillText("Score: " + this.score, this.width - 10, 30);
+    this.ctx.textAlign = "left";
+    this.ctx.fillText("Timer: " + this.formatTimer(), 10, 30);
+    if (this.gameOver) {
+      this.ctx.textAlign = "center";
+      this.ctx.font = "30px Bungee";
+      this.ctx.fillText("Game Over", this.width * 0.5, this.height * 0.5);
+    }
     this.ctx.restore();
   }
 }
@@ -89,10 +102,13 @@ window.addEventListener("load", function () {
 
   const game = new Game(canvas, ctx);
 
-  function animate() {
+  let lastTime = 0;
+  function animate(timeStamp) {
+    const deltaTime = timeStamp - lastTime;
+    lastTime = timeStamp;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    game.render();
-    if (!game.gameOver) requestAnimationFrame(animate);
+    game.render(deltaTime);
+    requestAnimationFrame(animate);
   }
   requestAnimationFrame(animate);
 });
