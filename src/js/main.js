@@ -19,6 +19,8 @@ class Game {
     this.score;
     this.gameOver;
     this.timer;
+    this.message1;
+    this.message2;
 
     this.resize(window.innerWidth, window.innerHeight);
 
@@ -49,7 +51,7 @@ class Game {
     this.ratio = this.height / this.baseHeight;
 
     this.gravity = 0.15 * this.ratio;
-    this.speed = 2 * this.ratio;
+    this.speed = 1 * this.ratio;
     this.background.resize();
     this.player.resize();
     this.createObtacles();
@@ -81,9 +83,18 @@ class Game {
     }
   }
 
+  checkCollision(a, b) {
+    const dx = a.collisionX - b.collisionX;
+    const dy = a.collisionY - b.collisionY;
+    const distance = Math.hypot(dx, dy);
+    const sumOfRadii = a.collisionRadius + b.collisionRadius;
+    return distance <= sumOfRadii;
+  }
+
   formatTimer() {
     return (this.timer * 0.001).toFixed(1);
   }
+
   drawStatusText() {
     this.ctx.save();
     this.ctx.fillText("Score: " + this.score, this.width - 10, 30);
