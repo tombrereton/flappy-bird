@@ -1,38 +1,24 @@
----
-interface Props {
-    title: string;
-}
-
-const { title } = Astro.props;
----
-
 <!doctype html>
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
-        <meta name="description" content="Astro description" />
-        <meta name="viewport" content="width=device-width" />
-        <meta name="generator" content={Astro.generator} />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link href="css/style.css" rel="stylesheet" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
             href="https://fonts.googleapis.com/css2?family=Bungee&family=Inter+Tight:ital,wght@0,100..900;1,100..900&family=Patrick+Hand&family=Pixelify+Sans:wght@400..700&family=Staatliches&display=swap"
             rel="stylesheet"
         />
-        <title>{title}</title>
+        <title>Vite App</title>
     </head>
     <body>
-        <slot />
+        <canvas id="canvas1"></canvas>
+        <div class="assets">
+            <img id="background" src="js/background_single.png" />
+            <div>
+                <script type="module" src="js/main.js"></script>
+            </div>
+        </div>
     </body>
 </html>
-
-<style>
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: "Bungee", sans-serif;
-        font-weight: 400;
-        font-style: normal;
-    }
-</style>
