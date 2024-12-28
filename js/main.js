@@ -22,10 +22,13 @@ class Game {
     this.message1;
     this.message2;
 
-    this.resize(window.innerWidth, window.innerHeight);
+    this.restartWithSize(window.innerWidth, window.innerHeight);
 
     window.addEventListener("resize", (e) => {
-      this.resize(e.currentTarget.innerWidth, e.currentTarget.innerHeight);
+      this.restartWithSize(
+        e.currentTarget.innerWidth,
+        e.currentTarget.innerHeight,
+      );
     });
     this.canvas.addEventListener("mousedown", (e) => {
       this.player.flap();
@@ -36,9 +39,16 @@ class Game {
     this.canvas.addEventListener("touchstart", (e) => {
       this.player.flap();
     });
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "R" || e.key === "r")
+        this.restartWithSize(
+          e.currentTarget.innerWidth,
+          e.currentTarget.innerHeight,
+        );
+    });
   }
 
-  resize(width, height) {
+  restartWithSize(width, height) {
     this.canvas.width = width;
     this.canvas.height = height;
     this.ctx.fillStyle = "blue";
