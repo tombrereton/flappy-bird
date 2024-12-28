@@ -13,10 +13,22 @@ export default class Player {
     this.collisionY;
     this.collisionRadius;
     this.collided;
+    this.image = document.getElementById("player_fish");
   }
 
   draw() {
-    this.game.ctx.fillRect(this.x, this.y, this.width, this.height);
+    this.game.ctx.drawImage(
+      this.image,
+      0,
+      0,
+      this.spriteWidth,
+      this.spriteHeight,
+      this.x,
+      this.y,
+      this.width,
+      this.height,
+    );
+    // this.game.ctx.fillRect(this.x, this.y, this.width, this.height);
     this.game.ctx.beginPath();
     this.game.ctx.arc(
       this.collisionX,
