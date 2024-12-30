@@ -14,6 +14,7 @@ export default class Player {
     this.collisionRadius;
     this.collided;
     this.image = document.getElementById("player_fish");
+    this.isDevToolEnabled = false;
   }
 
   draw() {
@@ -28,15 +29,17 @@ export default class Player {
       this.width,
       this.height,
     );
-    this.game.ctx.beginPath();
-    this.game.ctx.arc(
-      this.collisionX,
-      this.collisionY,
-      this.collisionRadius,
-      0,
-      Math.PI * 2,
-    );
-    this.game.ctx.stroke();
+    if (this.isDevToolEnabled) {
+      this.game.ctx.beginPath();
+      this.game.ctx.arc(
+        this.collisionX,
+        this.collisionY,
+        this.collisionRadius,
+        0,
+        Math.PI * 2,
+      );
+      this.game.ctx.stroke();
+    }
   }
 
   update() {
