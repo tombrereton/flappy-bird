@@ -28,7 +28,6 @@ export default class Player {
       this.width,
       this.height,
     );
-    // this.game.ctx.fillRect(this.x, this.y, this.width, this.height);
     this.game.ctx.beginPath();
     this.game.ctx.arc(
       this.collisionX,
@@ -65,7 +64,7 @@ export default class Player {
     this.y = this.game.height * 0.5 - this.height * 0.5;
     this.speedY = -5 * this.game.ratio;
     this.flapSpeed = 5 * this.game.ratio;
-    this.collisionRadius = this.width * 0.5;
+    this.collisionRadius = this.width * 0.4;
     this.collisionX = this.x + this.width * 0.5;
     this.collided = false;
   }

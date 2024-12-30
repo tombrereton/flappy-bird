@@ -13,6 +13,12 @@ export default class Obstacle {
     this.speedY =
       Math.random() < 0.5 ? -1 * this.game.ratio : 1 * this.game.ratio;
     this.markedForDeletion = false;
+    this.image = document.getElementById("small_gears");
+    this.numberOfGearSprites = 4;
+    this.randomedGearSprite = Math.floor(
+      Math.random() * this.numberOfGearSprites,
+    );
+    this.isDevToolEnabled = false;
   }
   update() {
     this.x -= this.game.speed;
@@ -37,16 +43,28 @@ export default class Obstacle {
     }
   }
   draw() {
-    this.game.ctx.fillRect(this.x, this.y, this.scaleWidth, this.scaleHeight);
-    this.game.ctx.beginPath();
-    this.game.ctx.arc(
-      this.collisionX,
-      this.collisionY,
-      this.collisionRadius,
+    this.game.ctx.drawImage(
+      this.image,
+      120 * this.randomedGearSprite,
       0,
-      Math.PI * 2,
+      this.spriteWidth,
+      this.spriteHeight,
+      this.x,
+      this.y,
+      this.scaleWidth,
+      this.scaleHeight,
     );
-    this.game.ctx.stroke();
+    if (this.isDevToolEnabled) {
+      this.game.ctx.beginPath();
+      this.game.ctx.arc(
+        this.collisionX,
+        this.collisionY,
+        this.collisionRadius,
+        0,
+        Math.PI * 2,
+      );
+      this.game.ctx.stroke();
+    }
   }
   resize() {
     this.scaleWidth = this.spriteWidth * this.game.ratio;
